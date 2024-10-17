@@ -1,7 +1,7 @@
 <?php
-/* Copyright (c) 2013 Florian Henry  <florian.henry@open-concept.pro>
- * Copyright (C) 2015 Marcos García  <marcosgdf@gmail.com>
- * Copyright (C) 2018 Charlene Benke <charlie@patas-monkey.com>
+/* Copyright (c) 2013 		Florian Henry  				<florian.henry@open-concept.pro>
+ * Copyright (C) 2015 		Marcos García  				<marcosgdf@gmail.com>
+ * Copyright (C) 2018 		Charlene Benke 				<charlie@patas-monkey.com>
  * Copyright (C) 2024		Frédéric France				<frederic.france@free.fr>
  * Copyright (C) 2024		MDW							<mdeweerd@users.noreply.github.com>
  * Copyright (C) 2024		Benjamin Falière			<benjamin.faliere@altairis.fr>
@@ -325,20 +325,20 @@ class FormProjets extends Form
 	/**
 	 *  Output a combo list with tasks qualified for a third party
 	 *
-	 * @param int $socid Id third party (-1=all, 0=only projects not linked to a third party, id=projects not linked or linked to third party id)
-	 * @param int $selected Id task preselected
-	 * @param string $htmlname Name of HTML select
-	 * @param int $maxlength Maximum length of label
-	 * @param int $option_only Return only html options lines without the select tag
-	 * @param string $show_empty Add an empty line ('1' or string to show for empty line)
-	 * @param int $discard_closed Discard closed projects (0=Keep, 1=hide completely, 2=Disable)
-	 * @param int $forcefocus Force focus on field (works with javascript only)
-	 * @param int $disabled Disabled
-	 * @param string $morecss More css added to the select component
-	 * @param string $projectsListId ''=Automatic filter on project allowed. List of id=Filter on project ids.
-	 * @param string $showmore 'all' = Show project info, 'progress' = Show task progression, ''=Show nothing more
-	 * @param User $usertofilter User object to use for filtering
-	 * @param int 	$nooutput 		1=Return string, do not send to output
+	 * @param int 		$socid 			Id third party (-1=all, 0=only projects not linked to a third party, id=projects not linked or linked to third party id)
+	 * @param int 		$selected 		Id task preselected
+	 * @param string 	$htmlname 		Name of HTML select
+	 * @param int 		$maxlength 		Maximum length of label
+	 * @param int 		$option_only 	Return only html options lines without the select tag
+	 * @param string 	$show_empty 	Add an empty line ('1' or string to show for empty line)
+	 * @param int 		$discard_closed Discard closed projects (0=Keep, 1=hide completely, 2=Disable)
+	 * @param int 		$forcefocus 	Force focus on field (works with javascript only)
+	 * @param int 		$disabled 		Disabled
+	 * @param string 	$morecss 		More css added to the select component
+	 * @param string 	$projectsListId ''=Automatic filter on project allowed. List of id=Filter on project ids.
+	 * @param string 	$showmore 		'all' = Show project info, 'progress' = Show task progression, ''=Show nothing more
+	 * @param User 		$usertofilter 	User object to use for filtering
+	 * @param int 		$nooutput 		1=Return string, do not send to output
 	 *
 	 * @return int|string                   Nbr of tasks if OK, <0 if KO. If nooutput=1: Return a HTML select string.
 	 */
@@ -402,7 +402,7 @@ class FormProjets extends Form
 			if (!empty($show_empty)) {
 				$out .= '<option value="0" class="optiongrey">';
 				if (!is_numeric($show_empty)) {
-					//if (!empty($conf->use_javascript_ajax)) $out .= '<span class="opacitymedium">aaa';
+					//if (!empty($conf->use_javascript_ajax)) $out .= '<span class="opacitymedium">';
 					$out .= $show_empty;
 					//if (!empty($conf->use_javascript_ajax)) $out .= '</span>';
 				} else {
@@ -426,7 +426,7 @@ class FormProjets extends Form
 						}
 
 						$labeltoshow = '';
-						$titletoshow = '';
+						$labeltoshowhtml = '';
 
 						$disabled = 0;
 						if ($obj->fk_statut == Project::STATUS_DRAFT) {
@@ -444,44 +444,44 @@ class FormProjets extends Form
 							//if ($obj->public) $labeltoshow.=' ('.$langs->trans("SharedProject").')';
 							//else $labeltoshow.=' ('.$langs->trans("Private").')';
 							$labeltoshow .= ' ' . dol_trunc($obj->title, $maxlength);
-							$titletoshow = $labeltoshow;
+							$labeltoshowhtml = $labeltoshow;
 
 							if ($obj->name) {
 								$labeltoshow .= ' (' . $obj->name . ')';
-								$titletoshow .= ' <span class="opacitymedium">(' . $obj->name . ')</span>';
+								$labeltoshowhtml .= ' <span class="opacitymedium">(' . $obj->name . ')</span>';
 							}
 
 							$disabled = 0;
 							if ($obj->fk_statut == Project::STATUS_DRAFT) {
 								$disabled = 1;
 								$labeltoshow .= ' - ' . $langs->trans("Draft");
-								$titletoshow .= ' -  <span class="opacitymedium">' . $langs->trans("Draft") . '</span>';
+								$labeltoshowhtml .= ' -  <span class="opacitymedium">' . $langs->trans("Draft") . '</span>';
 							} elseif ($obj->fk_statut == Project::STATUS_CLOSED) {
 								if ($discard_closed == 2) {
 									$disabled = 1;
 								}
 								$labeltoshow .= ' - ' . $langs->trans("Closed");
-								$titletoshow .= ' - <span class="opacitymedium">' . $langs->trans("Closed") . '</span>';
+								$labeltoshowhtml .= ' - <span class="opacitymedium">' . $langs->trans("Closed") . '</span>';
 							} elseif ($socid > 0 && (!empty($obj->fk_soc) && $obj->fk_soc != $socid)) {
 								$disabled = 1;
 								$labeltoshow .= ' - ' . $langs->trans("LinkedToAnotherCompany");
-								$titletoshow .= ' - <span class="opacitymedium">' . $langs->trans("LinkedToAnotherCompany") . '</span>';
+								$labeltoshowhtml .= ' - <span class="opacitymedium">' . $langs->trans("LinkedToAnotherCompany") . '</span>';
 							}
 							$labeltoshow .= ' - ';
-							$titletoshow .= ' - ';
+							$labeltoshowhtml .= ' - ';
 						}
 
 						// Label for task
 						$labeltoshow .= $obj->tref . ' ' . dol_trunc($obj->tlabel, $maxlength);
-						$titletoshow .= $obj->tref . ' ' . dol_trunc($obj->tlabel, $maxlength);
+						$labeltoshowhtml .= $obj->tref . ' - ' . dol_trunc($obj->tlabel, $maxlength);
 						if ($obj->usage_task && preg_match('/progress/', $showmore)) {
 							$labeltoshow .= ' <span class="opacitymedium">(' . $obj->progress . '%)</span>';
-							$titletoshow .= ' <span class="opacitymedium">(' . $obj->progress . '%)</span>';
+							$labeltoshowhtml .= ' <span class="opacitymedium">(' . $obj->progress . '%)</span>';
 						}
 
 						if (!empty($selected) && $selected == $obj->rowid) {
 							$out .= '<option value="' . $obj->rowid . '" selected';
-							$out .= ' data-html="' . dol_escape_htmltag($titletoshow) . '"';
+							$out .= ' data-html="' . dol_escape_htmltag($labeltoshowhtml) . '"';
 							//if ($disabled) $out.=' disabled';						// with select2, field can't be preselected if disabled
 							$out .= '>' . $labeltoshow . '</option>';
 						} else {
@@ -494,7 +494,7 @@ class FormProjets extends Form
 								}
 								//if ($obj->public) $labeltoshow.=' ('.$langs->trans("Public").')';
 								//else $labeltoshow.=' ('.$langs->trans("Private").')';
-								$resultat .= ' data-html="' . dol_escape_htmltag($titletoshow) . '"';
+								$resultat .= ' data-html="' . dol_escape_htmltag($labeltoshowhtml) . '"';
 								$resultat .= '>';
 								$resultat .= $labeltoshow;
 								$resultat .= '</option>';
@@ -546,7 +546,7 @@ class FormProjets extends Form
 		global $conf, $langs;
 
 		if ($table_element == 'projet_task') {
-			return ''; // Special cas of element we never link to a project (already always done)
+			return ''; // Special case of element we never link to a project (already always done)
 		}
 
 		$linkedtothirdparty = false;
@@ -877,7 +877,7 @@ class FormProjets extends Form
 				}
 				$out .= '</select>';
 			} else {
-				dol_print_error($this->db->lasterror);
+				dol_print_error($this->db, $this->db->lasterror);
 				return '';
 			}
 		}
@@ -929,7 +929,7 @@ class FormProjets extends Form
 				$out .= '</select>';
 			}
 		} else {
-			dol_print_error($this->db->lasterror);
+			dol_print_error($this->db, $this->db->lasterror);
 			return '';
 		}
 

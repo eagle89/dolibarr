@@ -38,7 +38,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php';
 $langs->load("companies");
 
 
-// Initialize technical object to manage hooks. Note that conf->hooks_modules contains array
+// Initialize a technical object to manage hooks. Note that conf->hooks_modules contains array
 $hookmanager = new HookManager($db);
 $hookmanager->initHooks(array('thirdpartiesindex'));
 
@@ -207,7 +207,6 @@ $thirdpartygraph .= '</div>';
 $thirdpartycateggraph = '';
 if (isModEnabled('category') && getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRDPARTIES')) {
 	require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
-	$elementtype = 'societe';
 
 	$thirdpartycateggraph = '<div class="div-table-responsive-no-min">';
 	$thirdpartycateggraph .= '<table class="noborder nohover centpercent">';
@@ -218,7 +217,7 @@ if (isModEnabled('category') && getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRD
 	$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."categorie as c ON cs.fk_categorie = c.rowid";
 	$sql .= " WHERE c.type = 2";
 	if (!is_numeric(getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRDPARTIES'))) {
-		$sql .= " AND c.label like '".$db->escape($conf->global->CATEGORY_GRAPHSTATS_ON_THIRDPARTIES)."'";
+		$sql .= " AND c.label like '".$db->escape(getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRDPARTIES'))."'";
 	}
 	$sql .= " AND c.entity IN (".getEntity('category').")";
 	$sql .= " GROUP BY c.label";
@@ -258,7 +257,7 @@ if (isModEnabled('category') && getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRD
 			while ($i < $num) {
 				$obj = $db->fetch_object($result);
 
-				$thirdpartycateggraph .= '<tr class="oddeven"><td>'.$obj->label.'</td><td>'.$obj->nb.'</td></tr>';
+				$thirdpartycateggraph .= '<tr class="oddeven"><td>'.dolPrintHTML($obj->label).'</td><td>'.$obj->nb.'</td></tr>';
 				$total += $obj->nb;
 				$i++;
 			}
@@ -278,6 +277,7 @@ if (isModEnabled('category') && getDolGlobalString('CATEGORY_GRAPHSTATS_ON_THIRD
 /*
  * Latest modified third parties
  */
+
 $sql = "SELECT s.rowid, s.nom as name, s.email, s.client, s.fournisseur";
 $sql .= ", s.code_client";
 $sql .= ", s.code_fournisseur";
@@ -335,8 +335,8 @@ if ($result) {
 
 		$lastmodified .= '<tr class="liste_titre"><th colspan="2">';
 		//$lastmodified .= img_picto('', 'company', 'class="pictofixedwidth"');
-		$lastmodified .= $transRecordedType;
-		$lastmodified .= '<a class="marginleftonly" href="'.DOL_URL_ROOT.'/societe/list.php?sortfield=s.tms&sortorder=DESC" title="'.$langs->trans("FullList").'">';
+		$lastmodified .= '<span class="valignmiddle">'.$transRecordedType.'</span>';
+		$lastmodified .= '<a class="marginleftonlyshort" href="'.DOL_URL_ROOT.'/societe/list.php?sortfield=s.tms&sortorder=DESC" title="'.$langs->trans("FullList").'">';
 		$lastmodified .= '<span class="badge marginleftonlyshort">...</span>';
 		$lastmodified .= '</a>';
 		$lastmodified .= '</th>';
@@ -422,7 +422,8 @@ if (getDolGlobalString('MAIN_COMPANY_PERENTITY_SHARED')) {
 if (!$user->hasRight('societe', 'client', 'voir')) {
 	$sql .= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
 }
-$sql .= ' WHERE s.entity IN ('.getEntity('societe').') AND sp.fk_soc = s.rowid';
+$sql .= " WHERE s.entity IN (".getEntity('societe').") AND sp.fk_soc = s.rowid";
+$sql .= " AND ((sp.fk_user_creat = ".((int) $user->id)." AND sp.priv = 1) OR sp.priv = 0)"; // check if this is a private contact
 if (!$user->hasRight('societe', 'client', 'voir')) {
 	$sql .= " AND s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
 }
@@ -458,8 +459,8 @@ if ($result) {
 
 		$lastmodifiedcontact .= '<tr class="liste_titre"><th colspan="2">';
 		//$lastmodifiedcontact .= img_picto('', 'contact', 'class="pictofixedwidth"');
-		$lastmodifiedcontact .= $transRecordedType;
-		$lastmodifiedcontact .= '<a class="marginleftonly" href="'.DOL_URL_ROOT.'/contact/list.php?sortfield=p.tms&sortorder=DESC" title="'.$langs->trans("FullList").'">';
+		$lastmodifiedcontact .= '<span class="valignmiddle">'.$transRecordedType.'</div>';
+		$lastmodifiedcontact .= '<a class="marginleftonlyshort" href="'.DOL_URL_ROOT.'/contact/list.php?sortfield=p.tms&sortorder=DESC" title="'.$langs->trans("FullList").'">';
 		//$lastmodifiedcontact .= img_picto($langs->trans("FullList"), 'contact');
 		$lastmodifiedcontact .= '<span class="badge marginleftonlyshort">...</span>';
 		$lastmodifiedcontact .= '</th>';
