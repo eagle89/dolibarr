@@ -1,0 +1,2 @@
+id,ref,label,datalezione,luogo,istruttore,numeroore,allievo,numero_allievi,amount,compensoistruttore,pagato,status
+1,(PROV1),Lezione di test LF,15/03/2024,Skatepark Trezzo,Luca Fumagalli,1,Massimiliano Caldara,1,25,15,1,1

@@ -1,0 +1,231 @@
+[10-Mar-2024 13:53:19 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:01:47 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:02:26 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:02:26 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:02:26 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:02:26 UTC] PHP Warning:  Attempt to read property "multidir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:02:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:02:33 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:10:18 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:10:28 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:12:53 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:12:53 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:12:53 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:12:53 UTC] PHP Warning:  Attempt to read property "multidir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:12:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:17:46 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:17:46 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:17:46 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:17:46 UTC] PHP Warning:  Attempt to read property "multidir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:17:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:17:54 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:20:45 UTC] PHP Warning:  Attempt to read property "element" on int in /home/npimsmit/public_html/business/core/class/html.form.class.php on line 8102
+[10-Mar-2024 14:41:12 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:41:12 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 111
+[10-Mar-2024 14:41:12 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:41:12 UTC] PHP Warning:  Attempt to read property "multidir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:41:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 152
+[10-Mar-2024 14:56:06 UTC] PHP Warning:  Undefined array key "default" in /home/npimsmit/public_html/business/core/class/commonobject.class.php on line 9664
+[10-Mar-2024 14:56:06 UTC] PHP Warning:  Undefined array key "default" in /home/npimsmit/public_html/business/core/class/commonobject.class.php on line 9672
+[10-Mar-2024 15:35:36 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 124
+[10-Mar-2024 15:35:36 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 124
+[10-Mar-2024 16:00:53 UTC] PHP Warning:  Undefined property: Conf::$lezioni in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 124
+[10-Mar-2024 16:00:53 UTC] PHP Warning:  Attempt to read property "dir_output" on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 124
+[10-Mar-2024 16:10:50 UTC] PHP Warning:  Undefined variable $memberstatic in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 764
+[10-Mar-2024 16:10:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getNomUrl() on null in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:764
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 764
+[15-Mar-2024 10:15:53 UTC] PHP Parse error:  syntax error, unexpected variable "$parameters" in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 299
+[15-Mar-2024 10:16:17 UTC] PHP Parse error:  syntax error, unexpected variable "$parameters" in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 299
+[15-Mar-2024 10:21:03 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 799
+[15-Mar-2024 10:21:03 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 799
+[15-Mar-2024 10:40:12 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:42:06 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:44:40 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:45:13 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:527
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 527
+[15-Mar-2024 10:46:52 UTC] PHP Fatal error:  Uncaught Error: Object of class DoliDBMysqli could not be converted to string in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:527
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 527
+[15-Mar-2024 10:47:40 UTC] PHP Fatal error:  Uncaught Error: Object of class DoliDBMysqli could not be converted to string in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:52:20 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:56:33 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:526
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 526
+[15-Mar-2024 10:58:46 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:529
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 529
+[15-Mar-2024 11:04:09 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:234
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 234
+[15-Mar-2024 11:07:24 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php:234
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_card.php on line 234
+[05-Apr-2024 15:51:20 UTC] PHP Warning:  Undefined variable $adh2 in /home/npimsmit/public_html/business/custom/lezioni/pacchetto_card.php on line 527
+[05-Apr-2024 15:51:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch() on null in /home/npimsmit/public_html/business/custom/lezioni/pacchetto_card.php:527
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/pacchetto_card.php on line 527
+[05-Apr-2024 15:53:33 UTC] PHP Fatal error:  Uncaught Error: Class "Adherent" not found in /home/npimsmit/public_html/business/custom/lezioni/pacchetto_card.php:233
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/pacchetto_card.php on line 233
+[08-Apr-2024 10:31:40 UTC] PHP Parse error:  syntax error, unexpected token "print" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 195
+[08-Apr-2024 10:32:03 UTC] PHP Fatal error:  Class LezioniStats contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (Stats::getNbByMonth) in /home/npimsmit/public_html/business/custom/lezioni/class/lezionistats.class.php on line 35
+[08-Apr-2024 10:37:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1569
+[08-Apr-2024 10:37:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1577
+[08-Apr-2024 10:37:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1581
+[08-Apr-2024 10:37:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1676
+[08-Apr-2024 10:37:42 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:38:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1569
+[08-Apr-2024 10:38:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1577
+[08-Apr-2024 10:38:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1581
+[08-Apr-2024 10:38:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1676
+[08-Apr-2024 10:38:53 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:39:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1569
+[08-Apr-2024 10:39:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1577
+[08-Apr-2024 10:39:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1581
+[08-Apr-2024 10:39:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1676
+[08-Apr-2024 10:39:18 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:39:50 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:40:24 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "istruttore" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 123
+[08-Apr-2024 10:46:46 UTC] PHP Warning:  Undefined array key "compenso" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:50:41 UTC] PHP Parse error:  syntax error, unexpected token "foreach" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 122
+[08-Apr-2024 10:51:01 UTC] PHP Parse error:  syntax error, unexpected token "print" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 124
+[08-Apr-2024 10:51:17 UTC] PHP Parse error:  syntax error, unexpected token "print" in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 202
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 10:51:35 UTC] PHP Warning:  Undefined array key 2 in /home/npimsmit/public_html/business/custom/lezioni/lezione_stats_test.php on line 126
+[08-Apr-2024 12:14:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1569
+[08-Apr-2024 12:14:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1577
+[08-Apr-2024 12:14:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1581
+[08-Apr-2024 12:14:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1676
+[08-Apr-2024 12:25:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1569
+[08-Apr-2024 12:25:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1577
+[08-Apr-2024 12:25:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1581
+[08-Apr-2024 12:25:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/core/lib/functions.lib.php:5459) in /home/npimsmit/public_html/business/main.inc.php on line 1676
+[09-Apr-2024 15:40:44 UTC] PHP Warning:  Undefined variable $date in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 144
+[09-Apr-2024 15:40:44 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 144
+[09-Apr-2024 15:41:09 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 144
+[09-Apr-2024 16:01:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function add() on array in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php:144
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 144
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Undefined variable $d in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Undefined variable $d in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Undefined variable $d in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 143
+[09-Apr-2024 16:12:00 UTC] PHP Warning:  Undefined variable $startDate in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 147
+[09-Apr-2024 16:14:06 UTC] PHP Fatal error:  Uncaught TypeError: date(): Argument #2 ($timestamp) must be of type ?int, string given in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php:148
+Stack trace:
+#0 /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php(148): date('Y m d', '2024-04-01')
+#1 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezioniindex.php on line 148
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:50:41 UTC] PHP Warning:  Array to string conversion in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 10:58:41 UTC] PHP Fatal error:  Uncaught TypeError: get_class(): Argument #1 ($object) must be of type object, string given in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:819
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 11:00:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_type() in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:819
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 819
+[10-Apr-2024 12:24:29 UTC] PHP Fatal error:  Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, string given in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:899
+Stack trace:
+#0 /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php(899): fwrite('id,ref,label,da...', 'lorem ipsum')
+#1 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 899
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 901
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 902
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 903
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 904
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 905
+[10-Apr-2024 12:27:42 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 906
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 903
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 904
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 905
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 906
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 907
+[10-Apr-2024 12:39:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 908
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 903
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 904
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 905
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 906
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 907
+[10-Apr-2024 12:44:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 908
+[10-Apr-2024 12:48:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/npimsmit/public_html/business/main.inc.php:1712) in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 903
+[10-Apr-2024 12:58:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function header() on int in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:903
+Stack trace:
+#0 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 903
+[10-Apr-2024 15:25:18 UTC] PHP Warning:  fopen(/home/npimsmit/public_html/business/documents/lezioni/temp/5/test.csv): Failed to open stream: No such file or directory in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 925
+[10-Apr-2024 15:25:18 UTC] PHP Fatal error:  Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, bool given in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php:926
+Stack trace:
+#0 /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php(926): fwrite(false, '')
+#1 {main}
+  thrown in /home/npimsmit/public_html/business/custom/lezioni/lezione_list.php on line 926
