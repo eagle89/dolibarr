@@ -295,7 +295,7 @@ $form = new Form($db);
 
 $now = dol_now();
 
-$title = $langs->trans("PagamentiEsternis");
+$title = $langs->trans("Pagamenti Esterni");
 //$help_url = "EN:Module_PagamentiEsterni|FR:Module_PagamentiEsterni_FR|ES:Módulo_PagamentiEsterni";
 $help_url = '';
 $morejs = array();
