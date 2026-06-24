@@ -2581,6 +2581,27 @@ class pdf_wheelbite extends ModelePDFFactures
 
 			$carac_emetteur .= pdf_build_address($outputlangs, $this->emetteur, $object->thirdparty, '', 0, 'source', $object);
 
+			// Move professional ids (eg. Partita IVA / Codice Fiscale) into sender box
+			$prof_lines = '';
+			for ($p = 1; $p <= 10; $p++) {
+				$prop = 'idprof' . $p;
+				if (!empty($this->emetteur->$prop)) {
+					$field = $outputlangs->transcountrynoentities('ProfId' . $p, $this->emetteur->country_code);
+					if (preg_match('/\((.*)\)/i', $field, $reg)) {
+						$field = $reg[1];
+					}
+					$prof_lines .= ($prof_lines ? "\n" : '') . $field . ': ' . $outputlangs->convToOutputCharset($this->emetteur->$prop);
+				}
+			}
+			// Intra VAT
+			if (!empty($this->emetteur->tva_intra) && $this->emetteur->tva_intra != '') {
+				$prof_lines .= ($prof_lines ? "\n" : '') . $outputlangs->transnoentities('VATIntraShort') . ': ' . $outputlangs->convToOutputCharset($this->emetteur->tva_intra);
+			}
+
+			if ($prof_lines) {
+				$carac_emetteur .= "\n" . $prof_lines; // append to sender info so it appears in sender box
+			}
+
 			// Show sender
 			$posy = getDolGlobalString('MAIN_PDF_USE_ISO_LOCATION') ? 40 : 42;
 			$posy += $top_shift;
@@ -2734,8 +2755,19 @@ class pdf_wheelbite extends ModelePDFFactures
 	 */
 	protected function _pagefoot(&$pdf, $object, $outputlangs, $hidefreetext = 0, $heightforqrinvoice = 0)
 	{
+		// Prevent printing professional ids (idprof*, tva_intra) in footer for this template
+		$fromcompany = clone $this->emetteur;
+		for ($p = 1; $p <= 10; $p++) {
+			$prop = 'idprof' . $p;
+			if (isset($fromcompany->$prop)) {
+				$fromcompany->$prop = '';
+			}
+		}
+		if (isset($fromcompany->tva_intra)) {
+			$fromcompany->tva_intra = '';
+		}
 		$showdetails = getDolGlobalInt('MAIN_GENERATE_DOCUMENTS_SHOW_FOOT_DETAILS', 0);
-		return pdf_pagefoot($pdf, $outputlangs, 'INVOICE_FREE_TEXT', $this->emetteur, $heightforqrinvoice + $this->marge_basse, $this->marge_gauche, $this->page_hauteur, $object, $showdetails, $hidefreetext, $this->page_largeur, $this->watermark);
+		return pdf_pagefoot($pdf, $outputlangs, 'INVOICE_FREE_TEXT', $fromcompany, $heightforqrinvoice + $this->marge_basse, $this->marge_gauche, $this->page_hauteur, $object, $showdetails, $hidefreetext, $this->page_largeur, $this->watermark);
 	}
 
 	/**
