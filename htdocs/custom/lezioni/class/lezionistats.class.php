@@ -412,14 +412,22 @@ class LezioniStats // extends Stats
 			$year = date('Y');
 		}
 		$resetDate = '01-13';
-        $sql = "SELECT date_format(datec,'%y') as dy,
-				fk_user as userid,
-				SUM(amount) as total,
-				5000 - SUM(amount) as residuo
-                FROM ".MAIN_DB_PREFIX."salary 
-				WHERE datec >= '".$year."-".$resetDate."' AND datec < '".($year + 1)."-".$resetDate."'
-				GROUP BY fk_user, date_format(datec,'%y')
-				ORDER by dy DESC, fk_user ASC";
+		$sql = "SELECT date_format(s.datec,'%y') as dy,
+			s.fk_user as userid,
+			SUM(s.amount) + COALESCE(pe.total_ext,0) as total,
+			5000 - (SUM(s.amount) + COALESCE(pe.total_ext,0)) as residuo
+			FROM ".MAIN_DB_PREFIX."salary as s
+			LEFT JOIN (
+				SELECT u.rowid as userid, SUM(pe.amount) as total_ext
+				FROM ".MAIN_DB_PREFIX."lezioni_pagamentiesterni as pe
+				LEFT JOIN ".MAIN_DB_PREFIX."user as u ON u.fk_member = pe.istruttore
+				WHERE pe.status = 1
+				AND pe.datafine >= '".$year."-".$resetDate."' AND pe.datafine < '".($year + 1)."-".$resetDate."'
+				GROUP BY u.rowid
+			) pe ON pe.userid = s.fk_user
+			WHERE s.datec >= '".$year."-".$resetDate."' AND s.datec < '".($year + 1)."-".$resetDate."'
+			GROUP BY s.fk_user, date_format(s.datec,'%y')
+			ORDER by dy DESC, s.fk_user ASC";
 
 		$result = array();
 
