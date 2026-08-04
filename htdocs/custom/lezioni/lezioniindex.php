@@ -347,12 +347,13 @@ if (!empty($residui)) {
 	
 	print '<div class="div-table-responsive div-table-responsive-no-min">';
 	foreach ($residuiByYear as $yr => $residuiRows) {
-		print '<table class="tagtable nobottomiftotal liste">'."\n";
-		print '<tr class="liste_titre">';
-		print '<th colspan="3">Residui Non Imponibili dal 13-01-'.$year.'</th>';
-		print '</tr>';
-		print '<tr class="liste_titre">';
-		print '<th class="wrapcolumntitle liste_titre" title="Istruttore">Istruttore</th>';
+print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text;">'."\n";
+	print '<tr class="liste_titre">';
+	print '<th colspan="4">Residui Non Imponibili dal 13-01-'.$year.'</th>';
+	print '</tr>';
+	print '<tr class="liste_titre">';
+	print '<th class="wrapcolumntitle liste_titre" title="Istruttore">Istruttore</th>';
+	print '<th class="wrapcolumntitle liste_titre" title="Codice Fiscale">Codice Fiscale</th>';
 		print '<th class="wrapcolumntitle liste_titre" title="Totale">Totale Compenso (€)</th>';
 		print '<th class="wrapcolumntitle liste_titre" title="Residuo" data-toggle="Dal 13-01-'.$year.'" data-placement="top">Residuo Esentasse WB (€)</th>';
 		print '</tr>';
@@ -366,10 +367,20 @@ if (!empty($residui)) {
 			$usrResidui = new MyUser($db);
 			$usrResidui->fetch($userid);
 			
+			$cf = trim((string) $usrResidui->national_registration_number);
+			if (empty($cf) && !empty($usrResidui->fk_member)) {
+				$adh = new Adherent($db);
+				if ($adh->fetch($usrResidui->fk_member) > 0) {
+					$cf = trim((string) ($adh->array_options['options_codicefiscale'] ?? ''));
+				}
+			}
+			if (empty($cf)) {
+				$cf = '-';
+			}
+			
 			print '<tr class="oddeven">';
-			print '<td>';
-			print $usrResidui->getNomUrl(-1);
-			print '</td>';
+			print '<td>'.$usrResidui->getNomUrl(-1).'</td>';
+			print '<td style="white-space: nowrap;">'.dol_escape_htmltag($cf).'</td>';
 			print '<td>'.number_format($totalSalary, 2, ',', '.').'</td>';
 			print '<td>'.number_format($residuoVal, 2, ',', '.').'</td>';
 			print '</tr>';
