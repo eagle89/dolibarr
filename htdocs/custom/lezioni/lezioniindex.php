@@ -347,7 +347,7 @@ if (!empty($residui)) {
 	
 	print '<div class="div-table-responsive div-table-responsive-no-min">';
 	foreach ($residuiByYear as $yr => $residuiRows) {
-print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text;">'."\n";
+print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text; table-layout:fixed; width:100%;">'."\n";
 	print '<tr class="liste_titre">';
 	print '<th colspan="4">Residui Non Imponibili dal 13-01-'.$year.'</th>';
 	print '</tr>';
@@ -380,9 +380,9 @@ print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -w
 			
 			print '<tr class="oddeven">';
 			print '<td>'.$usrResidui->getNomUrl(-1).'</td>';
-			print '<td style="white-space: nowrap;">'.dol_escape_htmltag($cf).'</td>';
-			print '<td>'.number_format($totalSalary, 2, ',', '.').'</td>';
-			print '<td>'.number_format($residuoVal, 2, ',', '.').'</td>';
+			print '<td style="max-width:140px; white-space:normal; word-break:break-word;">'.dol_escape_htmltag($cf).'</td>';
+			print '<td>'.number_format($totalSalary, 2, ',', '').'</td>';
+			print '<td>'.number_format($residuoVal, 2, ',', '').'</td>';
 			print '</tr>';
 		}
 		print '</table><br>';
