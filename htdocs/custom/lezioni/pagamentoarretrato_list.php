@@ -875,7 +875,13 @@ while ($i < $imaxinloop) {
 					if ($val['type'] == 'html') {
 						print '<div class="small lineheightsmall twolinesmax-normallineheight">';
 					}
-					print $object->showOutputField($val, $key, (string) $object->$key, '');
+					// If this is the main title/label field, wrap it with a link to the card
+					if ($key === 'label') {
+						$urlcard = dol_buildpath('/lezioni/pagamentoarretrato_card.php', 1).'?id='.(int) $object->id;
+						print '<a href="'.$urlcard.'">'.$object->showOutputField($val, $key, (string) $object->$key, '').'</a>';
+					} else {
+						print $object->showOutputField($val, $key, (string) $object->$key, '');
+					}
 					if ($val['type'] == 'html') {
 						print '</div>';
 					}

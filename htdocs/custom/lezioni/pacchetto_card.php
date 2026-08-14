@@ -839,8 +839,17 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 				$deleteUrl = '';
 				$buttonId = 'action-delete';
 			}
-			$params = array();
-			print dolGetButtonAction('', $langs->trans("Delete"), 'delete', $deleteUrl, $buttonId, $permissiontodelete, $params);
+				$params = array();
+				print dolGetButtonAction('', $langs->trans("Delete"), 'delete', $deleteUrl, $buttonId, $permissiontodelete, $params);
+
+				// Associate / Create bank transaction (Opzione A)
+				if (isModEnabled('bank') && $permissiontoadd) {
+					$selectBankUrl = DOL_URL_ROOT.'/custom/lezioni/select_bank_transaction_popup.php';
+					print dolGetButtonAction('', $langs->trans('AssociaTransazione'), 'default', 'javascript:window.open("'.dol_escape_js($selectBankUrl).'", "selectbank", "width=900,height=600,scrollbars=1");');
+
+					$createBankUrl = DOL_URL_ROOT.'/custom/lezioni/select_bank_transaction_popup.php';
+					print dolGetButtonAction('', $langs->trans('CreaTransazione'), 'add', 'javascript:window.open("'.dol_escape_js($createBankUrl).'", "selectbank", "width=900,height=600,scrollbars=1");', '', $permissiontoadd);
+				}
 		}
 		print '</div>'."\n";
 	}

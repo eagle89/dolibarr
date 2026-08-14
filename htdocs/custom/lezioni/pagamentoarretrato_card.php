@@ -202,7 +202,30 @@ if (empty($reshook)) {
 	$triggermodname = $object->TRIGGER_PREFIX.'_MODIFY'; // Name of trigger action code to execute when we modify record. Used in actions_addupdatedelete.inc.php
 
 	// Actions cancel, add, update, update_extras, confirm_validate, confirm_delete, confirm_deleteline, confirm_clone, confirm_close, confirm_setdraft, confirm_reopen
-	include DOL_DOCUMENT_ROOT.'/core/actions_addupdatedelete.inc.php';
+	// Custom validation: if pagato is set, require bank_account
+	$skip_core_actions_addupdate = false;
+	if (in_array($action, array('add', 'update'), true)) {
+		$pagato_post = GETPOSTISSET('pagato') ? (GETPOST('pagato') == 'on' || GETPOST('pagato') == '1' ? 1 : 0) : null;
+		// When adding, check POST. When updating, POST overrides object value if set.
+		$pagato_effective = $pagato_post !== null ? $pagato_post : (isset($object->pagato) ? $object->pagato : 0);
+		if ($pagato_effective) {
+			$bank_account_post = GETPOSTINT('bank_account');
+			if (empty($bank_account_post)) {
+				setEventMessages($langs->trans('FieldRequired', $langs->transnoentitiesnoconv('BankAccount')), null, 'errors');
+				// prevent core add/update include so user sees form again with message
+				$skip_core_actions_addupdate = true;
+				// Force display of form again
+				if ($action == 'add') {
+					$action = 'create';
+				} elseif ($action == 'update') {
+					$action = 'edit';
+				}
+			}
+		}
+	}
+	if (! $skip_core_actions_addupdate) {
+		include DOL_DOCUMENT_ROOT.'/core/actions_addupdatedelete.inc.php';
+	}
 
 	// Actions when linking object each other
 	include DOL_DOCUMENT_ROOT.'/core/actions_dellink.inc.php';
@@ -275,6 +298,17 @@ if ($action == 'create') {
 
 	print load_fiche_titre($title, '', $object->picto);
 
+	// Determine pagato value from POST (creation) to set disabled state for bank fields
+	$pagato_post = GETPOSTISSET('pagato') ? (GETPOST('pagato') == 'on' || GETPOST('pagato') == '1' ? 1 : 0) : 0;
+	if (empty($pagato_post)) {
+		if (isset($object->fields['bank_account'])) {
+			$object->fields['bank_account']['disabled'] = 1;
+		}
+		if (isset($object->fields['bank_transaction'])) {
+			$object->fields['bank_transaction']['disabled'] = 1;
+		}
+	}
+
 	print '<form method="POST" action="'.dolBuildUrl($_SERVER["PHP_SELF"]).'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
 	print '<input type="hidden" name="action" value="add">';
@@ -303,9 +337,32 @@ if ($action == 'create') {
 
 	print dol_get_fiche_end();
 
+	// Bank buttons: inject small action icons next to bank selector (create form)
+	if (isModEnabled('bank') && $permissiontoadd) {
+		$selectBankUrl = DOL_URL_ROOT.'/custom/lezioni/select_bank_transaction_popup.php';
+		$baseUrl = dol_escape_js($selectBankUrl);
+		$createCardUrl = dol_escape_js(DOL_URL_ROOT.'/compta/bank/various_payment/card.php?action=create');
+		print '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function() {';
+		// Find element by name attribute and append icons
+		print 'var sel = document.getElementsByName("bank_account")[0]; if(!sel) sel = document.querySelector("select[name=bank_account]"); if(sel) {';
+		// open popup using current select value as accountid parameter
+		print 'var openAssociatePopup = function(){ var acct = sel.value; if(!acct || acct<=0){ return false; } var url = "'.dol_escape_js(DOL_URL_ROOT.'/compta/bank/bankentries_list.php').'?id=" + encodeURIComponent(acct); try{ var back = window.location.pathname + window.location.search; url += "&backtopage=" + encodeURIComponent(back); }catch(e){} window.open(url, "bankentries", "width=1100,height=700,scrollbars=1"); return false; };';
+		// open native Dolibarr bank create form
+		print 'var openCreatePopup = function(){ var acct = sel.value; var url = "'.$createCardUrl.'"; if(acct && acct>0) url += "&accountid=" + encodeURIComponent(acct); try{ var back = window.location.pathname + window.location.search; url += "&backtopage="+encodeURIComponent(back); }catch(e){} window.open(url, "createbank", "width=1100,height=700,scrollbars=1"); return false; };';
+		print 'var a1 = document.createElement("a"); a1.href = "#"; a1.className = "valignmiddle paddingleft"; a1.title = "'.dol_escape_js($langs->trans('AssociaTransazione')).'"; a1.onclick = openAssociatePopup;';
+		print 'var s1 = document.createElement("span"); s1.className = "fa fa-link valignmiddle"; a1.appendChild(s1); sel.parentNode.insertBefore(a1, sel.nextSibling);';
+		// Create icon (plus)
+		print 'var a2 = document.createElement("a"); a2.href = "#"; a2.className = "valignmiddle paddingleft"; a2.title = "'.dol_escape_js($langs->trans('CreaTransazione')).'"; a2.onclick = openCreatePopup;';
+		print 'var s2 = document.createElement("span"); s2.className = "fa fa-plus-circle valignmiddle"; a2.appendChild(s2); sel.parentNode.insertBefore(a2, a1.nextSibling);';
+		print '} });</script>';
+	}
+
 	print $form->buttonsSaveCancel("Create");
 
 	print '</form>';
+
+// JS to toggle bank fields when 'pagato' checkbox changes
+print '<script type="text/javascript">(function(){function getPagatoState(){var els=document.getElementsByName("pagato");if(!els||els.length==0) return false;for(var i=0;i<els.length;i++){if(els[i].type=="checkbox") return els[i].checked;}for(var i=0;i<els.length;i++){if(els[i].type!="hidden") return (els[i].value=="1"||els[i].value=="on");}return (els[0] && (els[0].value=="1"||els[0].value=="on"));}function setBankFieldsState(){var pagato=getPagatoState();var acct=document.getElementsByName("bank_account");var trx=document.getElementsByName("bank_transaction");var disabled=!pagato;function setEls(arr){for(var i=0;i<arr.length;i++){try{arr[i].disabled=disabled;}catch(e){}}}setEls(acct);setEls(trx);}document.addEventListener("DOMContentLoaded",function(){var els=document.getElementsByName("pagato");if(els){for(var i=0;i<els.length;i++){if(els[i].type=="checkbox") els[i].addEventListener("change",setBankFieldsState);} }setBankFieldsState();});})();</script>';
 
 	//dol_set_focus('input[name="ref"]');
 }
@@ -313,6 +370,17 @@ if ($action == 'create') {
 // Part to edit record
 if (($id || $ref) && $action == 'edit') {
 	print load_fiche_titre($langs->trans("PagamentoArretrato"), '', $object->picto);
+
+	// Determine effective pagato value: POST override or object value
+	$pagato_effective = GETPOSTISSET('pagato') ? (GETPOST('pagato') == 'on' || GETPOST('pagato') == '1' ? 1 : 0) : (isset($object->pagato) ? $object->pagato : 0);
+	if (empty($pagato_effective)) {
+		if (isset($object->fields['bank_account'])) {
+			$object->fields['bank_account']['disabled'] = 1;
+		}
+		if (isset($object->fields['bank_transaction'])) {
+			$object->fields['bank_transaction']['disabled'] = 1;
+		}
+	}
 
 	print '<form method="POST" action="'.dolBuildUrl($_SERVER["PHP_SELF"]).'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
@@ -338,6 +406,26 @@ if (($id || $ref) && $action == 'edit') {
 	print '</table>';
 
 	print dol_get_fiche_end();
+// Bank buttons (only in edit form)
+	// Bank buttons: inject small action icons next to bank selector (edit form)
+	if (isModEnabled('bank') && $permissiontoadd) {
+		$selectBankUrl = DOL_URL_ROOT.'/custom/lezioni/select_bank_transaction_popup.php';
+		$baseUrl = dol_escape_js($selectBankUrl);
+		// Ensure create URL exists even when create-section above was not executed
+		if (empty($createCardUrl)) $createCardUrl = dol_escape_js(DOL_URL_ROOT.'/compta/bank/various_payment/card.php?action=create');
+		print '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function() {';
+		print 'var sel = document.getElementsByName("bank_account")[0]; if(!sel) sel = document.querySelector("select[name=bank_account]"); if(sel) {';
+		print 'var openAssociatePopup = function(){ var acct = sel.value; if(!acct || acct<=0){ return false; } var url = "'.dol_escape_js(DOL_URL_ROOT.'/compta/bank/bankentries_list.php').'?id=" + encodeURIComponent(acct); try{ var back = window.location.pathname + window.location.search; url += "&backtopage=" + encodeURIComponent(back); }catch(e){} window.open(url, "bankentries", "width=1100,height=700,scrollbars=1"); return false; };';
+		print 'var openCreatePopup = function(){ var acct = sel.value; var url = "'.$createCardUrl.'"; if(acct && acct>0) url += "&accountid=" + encodeURIComponent(acct); try{ var back = window.location.pathname + window.location.search; url += "&backtopage="+encodeURIComponent(back); }catch(e){} window.open(url, "createbank", "width=1100,height=700,scrollbars=1"); return false; };';
+		print 'var s1 = document.createElement("span"); s1.className = "fa fa-link valignmiddle";';
+		print 'var a1 = document.createElement("a"); a1.href = "#"; a1.className = "valignmiddle paddingleft"; a1.title = "'.dol_escape_js($langs->trans('AssociaTransazione')).'"; a1.onclick = openAssociatePopup; a1.appendChild(s1); sel.parentNode.insertBefore(a1, sel.nextSibling);';
+		print 'var a2 = document.createElement("a"); a2.href = "#"; a2.className = "valignmiddle paddingleft"; a2.title = "'.dol_escape_js($langs->trans('CreaTransazione')).'"; a2.onclick = openCreatePopup;';
+		print 'var s2 = document.createElement("span"); s2.className = "fa fa-plus-circle valignmiddle"; a2.appendChild(s2); sel.parentNode.insertBefore(a2, a1.nextSibling);';
+		print '} });</script>';
+	}
+
+// JS to toggle bank fields when 'pagato' checkbox changes (edit form)
+print '<script type="text/javascript">(function(){function getPagatoState(){var els=document.getElementsByName("pagato");if(!els||els.length==0) return false;for(var i=0;i<els.length;i++){if(els[i].type=="checkbox") return els[i].checked;}for(var i=0;i<els.length;i++){if(els[i].type!="hidden") return (els[i].value=="1"||els[i].value=="on");}return (els[0] && (els[0].value=="1"||els[0].value=="on"));}function setBankFieldsState(){var pagato=getPagatoState();var acct=document.getElementsByName("bank_account");var trx=document.getElementsByName("bank_transaction");var disabled=!pagato;function setEls(arr){for(var i=0;i<arr.length;i++){try{arr[i].disabled=disabled;}catch(e){}}}setEls(acct);setEls(trx);}document.addEventListener("DOMContentLoaded",function(){var els=document.getElementsByName("pagato");if(els){for(var i=0;i<els.length;i++){if(els[i].type=="checkbox") els[i].addEventListener("change",setBankFieldsState);} }setBankFieldsState();});})();</script>';
 
 	print $form->buttonsSaveCancel();
 
@@ -445,6 +533,8 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 	dol_banner_tab($object, 'ref', $linkback, 1, 'ref', 'ref', $morehtmlref);
 
+// Top modify button intentionally removed to avoid duplicate action (Modify remains in actions area)
+
 
 	print '<div class="fichecenter">';
 	print '<div class="fichehalfleft">';
@@ -454,11 +544,54 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 	// Common attributes
 	//$keyforbreak='fieldkeytoswitchonsecondcolumn';	// We change column just before this field
 	//unset($object->fields['fk_project']);				// Hide field already shown in banner
-	//unset($object->fields['fk_soc']);					// Hide field already shown in banner
+	//unset($object->fields['fk_soc']);				// Hide field already shown in banner
+	// Remove bank_account and bank_transaction from default view and render transaction link manually below
+	$backup_bank_account_field = null;
+	$backup_bank_transaction_field = null;
+	if (isset($object->fields['bank_account'])) {
+		$backup_bank_account_field = $object->fields['bank_account'];
+		unset($object->fields['bank_account']);
+	}
+	if (isset($object->fields['bank_transaction'])) {
+		$backup_bank_transaction_field = $object->fields['bank_transaction'];
+		unset($object->fields['bank_transaction']);
+	}
 	include DOL_DOCUMENT_ROOT.'/core/tpl/commonfields_view.tpl.php';
+
+	// After default view, show bank_transaction as a link (if present); fallback to raw id if fetch fails
+	if (!empty($object->bank_transaction)) {
+		if (!class_exists('AccountLine')) {
+			dol_include_once('/compta/bank/class/account.class.php');
+		}
+		print '<tr>';
+		print '<td>'.$langs->trans('Transazione Pagamento').'</td>';
+		print '<td colspan="3">';
+		if (isModEnabled('bank')) {
+			$bankline = new AccountLine($db);
+			$resfetch = $bankline->fetch($object->bank_transaction);
+			if ($resfetch > 0) {
+				print $bankline->getNomUrl(1, 0, 'showconciliated');
+			} else {
+				// Fallback: show raw id so user can report
+				print $langs->trans('TransazioneID').': '.dol_escape_htmltag($object->bank_transaction);
+			}
+		} else {
+			print dol_escape_htmltag($object->bank_transaction);
+		}
+		print '</td>';
+		print '</tr>';
+	}
 
 	// Other attributes. Fields from hook formObjectOptions and Extrafields.
 	include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_view.tpl.php';
+
+	// Restore bank_account and bank_transaction field definitions for other usages
+	if ($backup_bank_account_field !== null) {
+		$object->fields['bank_account'] = $backup_bank_account_field;
+	}
+	if ($backup_bank_transaction_field !== null) {
+		$object->fields['bank_transaction'] = $backup_bank_transaction_field;
+	}
 
 	print '</table>';
 	print '</div>';
@@ -587,8 +720,10 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 				$deleteUrl = '';
 				$buttonId = 'action-delete';
 			}
-			$params = array();
-			print dolGetButtonAction('', $langs->trans("Delete"), 'delete', $deleteUrl, $buttonId, $permissiontodelete, $params);
+				$params = array();
+				print dolGetButtonAction('', $langs->trans("Delete"), 'delete', $deleteUrl, $buttonId, $permissiontodelete, $params);
+
+				// Associate / Create bank transaction buttons moved to banner for view mode
 		}
 		print '</div>'."\n";
 	}
