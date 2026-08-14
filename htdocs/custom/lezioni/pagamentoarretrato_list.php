@@ -299,7 +299,7 @@ $form = new Form($db);
 
 $now = dol_now();
 
-$title = $langs->trans("PagamentoArretratos");
+$title = $langs->trans("Pagamenti Arretrati");
 //$help_url = "EN:Module_PagamentoArretrato|FR:Module_PagamentoArretrato_FR|ES:Módulo_PagamentoArretrato";
 $help_url = '';
 $morejs = array();

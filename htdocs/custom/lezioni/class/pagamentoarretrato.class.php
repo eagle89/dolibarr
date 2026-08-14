@@ -147,7 +147,7 @@ class PagamentoArretrato extends CommonObject
 		"datainizio" => array("type" => "date", "label" => "Data Inizio", "enabled" => "1", 'position' => 32, 'notnull' => 0, "visible" => "1", "help" => "Inizio periodo del pagamento arretrato", "comment" => "Inizio periodo del pagamento arretrato"),
 		"datafine" => array("type" => "date", "label" => "Data Fine", "enabled" => "1", 'position' => 33, 'notnull' => 0, "visible" => "1", "help" => "Fine periodo del pagamento arretrato", "comment" => "Fine periodo del pagamento arretrato"),
 		"istruttore" => array("type" => "integer:member:adherents/class/adherent.class.php:0:((fk_adherent_type:=:2) or (fk_adherent_type:=:3) or (fk_adherent_type:=:4))", "label" => "Istruttore", "enabled" => "1", 'position' => 31, 'notnull' => 0, "visible" => "1",),
-		"pagato" => array("type" => "boolean", "label" => "pagato", "enabled" => "1", 'position' => 41, 'notnull' => 1, "visible" => "1",),
+		"pagato" => array("type" => "boolean", "label" => "pagato", "enabled" => "1", 'position' => 41, 'notnull' => 1, "visible" => "1", "default" => "0",),
 		"bank_account" => array("type" => "integer:bank_account:compta/bank/class/account.class.php", "label" => "Banca Pagamento", "enabled" => "1", 'position' => 42, 'notnull' => 0, "visible" => "1", "help" => "Banca",),
 		"bank_transaction" => array("type" => "integer", "label" => "Transazione Pagamento", "enabled" => "1", 'position' => 43, 'notnull' => 0, "visible" => "1",),
 	);

@@ -34,7 +34,7 @@ CREATE TABLE llx_lezioni_pagamentoarretrato(
 	datainizio date, 
 	datafine date, 
 	istruttore integer, 
-	pagato boolean NOT NULL, 
+	pagato boolean DEFAULT 0 NOT NULL,
 	bank_account integer, 
 	bank_transaction integer
 	-- END MODULEBUILDER FIELDS

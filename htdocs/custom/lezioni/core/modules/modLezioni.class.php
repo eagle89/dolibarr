@@ -343,6 +343,34 @@ class modLezioni extends DolibarrModules
 			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
 		);
 		/* END MODULEBUILDER TOPMENU */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni',
+			'type' => 'left',
+			'titre' => 'Compensi Istruttori',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_compensi',
+			'url' => '/lezioni/lezioniindex.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 900,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '$user->hasRight("lezioni", "lezione", "read")',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni',
+			'type' => 'left',
+			'titre' => 'Residui Non Imponibili',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_residui_non_imponibili',
+			'url' => '/lezioni/residui_non_imponibili.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 901,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '$user->hasRight("lezioni", "lezione", "read")',
+			'target' => '',
+			'user' => 2,
+		);
 		/* BEGIN MODULEBUILDER LEFTMENU PAGAMENTOARRETRATO */
 		$this->menu[$r++] = array(
 			'fk_menu' => 'fk_mainmenu=lezioni',

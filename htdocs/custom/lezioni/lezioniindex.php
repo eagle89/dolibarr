@@ -64,7 +64,6 @@ require_once DOL_DOCUMENT_ROOT.'/user/class/user.class.php';
 // load module libraries
 require_once __DIR__.'/class/lezione.class.php';
 require_once __DIR__.'/class/lezionistats.class.php';
-require_once __DIR__.'/class/myuser.class.php';
 
 include DOL_DOCUMENT_ROOT.'/theme/'.$conf->theme.'/theme_vars.inc.php';
 include_once DOL_DOCUMENT_ROOT.'/core/class/dolgraph.class.php';
@@ -109,14 +108,22 @@ if (empty($year)) {
 }
 $stats = new LezioniStats($db);
 $compensi = $stats->getIstrCompensiByMonth($year);
-$allResidui = $stats->getIstrYearlyResidui($year);
 
-// Filtra residui per anno selezionato
-$residui = array();
-foreach ($allResidui as $row) {
-	if ($row[0] == substr($year, -2)) { // confronta solo ultimi 2 caratteri dell'anno
-		$residui[] = $row;
+// Pagamenti arretrati non ancora saldati, aggregati per istruttore.
+$arretratiNonPagati = array();
+$sql = 'SELECT p.istruttore, COUNT(p.rowid) AS nb_pagamenti, SUM(p.amount) AS totale_arretrati';
+$sql .= ' FROM '.MAIN_DB_PREFIX.'lezioni_pagamentoarretrato AS p';
+$sql .= ' WHERE (p.pagato IS NULL OR p.pagato <> 1)';
+$sql .= ' GROUP BY p.istruttore';
+$sql .= ' ORDER BY totale_arretrati DESC';
+$resql = $db->query($sql);
+if ($resql) {
+	while ($obj = $db->fetch_object($resql)) {
+		$arretratiNonPagati[] = $obj;
 	}
+	$db->free($resql);
+} else {
+	dol_syslog(__METHOD__.' - unable to load unpaid overdue payments: '.$db->lasterror(), LOG_ERR);
 }
 
 //csv export variables
@@ -139,7 +146,6 @@ $exportLine = '';
 $form = new Form($db);
 $formfile = new FormFile($db);
 $adh = new Adherent($db);
-$usr = new MyUser($db);
 
 llxHeader("", $langs->trans("LezioniArea"), '', '', 0, 0, '', '', '', 'mod-lezioni page-index');
 
@@ -167,9 +173,10 @@ print '</select>';
 print '</form>';
 print '</div>' . PHP_EOL;
 
-print '<div class="fichecenter"><div class="fichethirdleft">';
+print '<div class="fichecenter" style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;">';
+print '<div style="flex:2 1 600px; min-width:0;">';
 print '<div class="div-table-responsive div-table-responsive-no-min">'; // Modifica per garantire una migliore responsività
-print '<table class="tagtable nobottomiftotal liste">'."\n";
+print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text;">'."\n";
 //title
 print '<tr class="liste_titre">';
 print '<th colspan="5">Compensi Istruttori '.$year.'</th>';
@@ -256,6 +263,35 @@ fwrite($handle, $exportLine);
 fclose($handle);
 $exportInProgress = false;
 
+print '</div><div style="flex:1 1 300px; min-width:0;">';
+print '<div class="div-table-responsive div-table-responsive-no-min">';
+print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text;">'."\n";
+print '<tr class="liste_titre"><th colspan="3">Pagamenti Arretrati Non Pagati</th></tr>';
+print '<tr class="liste_titre">';
+print '<th class="wrapcolumntitle liste_titre">Istruttore</th>';
+print '<th class="wrapcolumntitle liste_titre right">Numero pagamenti</th>';
+print '<th class="wrapcolumntitle liste_titre right">Totale da pagare (€)</th>';
+print '</tr>';
+
+if (!empty($arretratiNonPagati)) {
+	foreach ($arretratiNonPagati as $arretrato) {
+		print '<tr class="oddeven">';
+		if (!empty($arretrato->istruttore) && $adh->fetch($arretrato->istruttore) > 0) {
+			$adh->ref = $adh->getFullname($langs);
+			print '<td>'.$adh->getNomUrl(-1).'</td>';
+		} else {
+			print '<td class="opacitymedium">Istruttore non assegnato</td>';
+		}
+		print '<td class="right">'.((int) $arretrato->nb_pagamenti).'</td>';
+		print '<td class="right">'.price($arretrato->totale_arretrati).'</td>';
+		print '</tr>';
+	}
+} else {
+	print '<tr class="oddeven"><td colspan="3" class="opacitymedium">'.$langs->trans('None').'</td></tr>';
+}
+print '</table></div>';
+print '</div></div>';
+
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
 // Draft MyObject
 if (isModEnabled('lezioni') && $user->hasRight('lezioni', 'read')) {
@@ -328,73 +364,6 @@ if (isModEnabled('lezioni') && $user->hasRight('lezioni', 'read')) {
 END MODULEBUILDER DRAFT MYOBJECT */
 
 
-print '</div><div class="fichetwothirdright">';
-
-// Tabella Residui Non Imponibili - spaccata per anno
-if (!empty($residui)) {
-	// Raggruppa per anno
-	$residuiByYear = array();
-	foreach ($residui as $residuRow) {
-		$yr = $residuRow[0];
-		if (!isset($residuiByYear[$yr])) {
-			$residuiByYear[$yr] = array();
-		}
-		$residuiByYear[$yr][] = $residuRow;
-	}
-	
-	// Ordina gli anni in ordine decrescente
-	krsort($residuiByYear);
-	
-	print '<div class="div-table-responsive div-table-responsive-no-min">';
-	foreach ($residuiByYear as $yr => $residuiRows) {
-print '<table class="tagtable nobottomiftotal liste" style="user-select:text; -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text; table-layout:fixed; width:100%;">'."\n";
-	print '<tr class="liste_titre">';
-	print '<th colspan="4">Residui Non Imponibili dal 13-01-'.$year.'</th>';
-	print '</tr>';
-	print '<tr class="liste_titre">';
-	print '<th class="wrapcolumntitle liste_titre" title="Istruttore">Istruttore</th>';
-	print '<th class="wrapcolumntitle liste_titre" title="Codice Fiscale">Codice Fiscale</th>';
-		print '<th class="wrapcolumntitle liste_titre" title="Totale">Totale Compenso (€)</th>';
-		print '<th class="wrapcolumntitle liste_titre" title="Residuo" data-toggle="Dal 13-01-'.$year.'" data-placement="top">Residuo Esentasse WB (€)</th>';
-		print '</tr>';
-		
-		foreach ($residuiRows as $residuRow) {
-			$userid = $residuRow[1]; // user id
-			$totalSalary = round($residuRow[2], 2); // totale stipendio
-			$residuoVal = round($residuRow[3], 2); // residuo
-			
-			// Fetch utente per ottenere il nome
-			$usrResidui = new MyUser($db);
-			$usrResidui->fetch($userid);
-			
-			$cf = trim((string) $usrResidui->national_registration_number);
-			if (empty($cf) && !empty($usrResidui->fk_member)) {
-				$adh = new Adherent($db);
-				if ($adh->fetch($usrResidui->fk_member) > 0) {
-					$cf = trim((string) ($adh->array_options['options_codicefiscale'] ?? ''));
-				}
-			}
-			if (empty($cf)) {
-				$cf = '-';
-			}
-			
-			print '<tr class="oddeven">';
-			print '<td>'.$usrResidui->getNomUrl(-1).'</td>';
-			print '<td style="max-width:140px; white-space:normal; word-break:break-word;">'.dol_escape_htmltag($cf).'</td>';
-			print '<td>'.number_format($totalSalary, 2, ',', '').'</td>';
-			print '<td>'.number_format($residuoVal, 2, ',', '').'</td>';
-			print '</tr>';
-		}
-		print '</table><br>';
-	}
-	print '</div>';
-} else {
-	print '<div class="div-table-responsive div-table-responsive-no-min">';
-	print '<table class="tagtable nobottomiftotal liste">'."\n";
-	print '<tr class="oddeven"><td colspan="3" class="opacitymedium">'.$langs->trans("None").'</td></tr>';
-	print '</table></div>';
-}
-
 $NBMAX = getDolGlobalInt('MAIN_SIZE_SHORTLIST_LIMIT');
 $max = getDolGlobalInt('MAIN_SIZE_SHORTLIST_LIMIT');
 
@@ -449,8 +418,6 @@ if (isModEnabled('lezioni') && $user->hasRight('lezioni', 'read')) {
 	}
 }
 */
-
-print '</div></div>';
 
 // End of page
 llxFooter();
