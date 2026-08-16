@@ -343,6 +343,82 @@ class modLezioni extends DolibarrModules
 			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
 		);
 		/* END MODULEBUILDER TOPMENU */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni',
+			'type' => 'left',
+			'titre' => 'Compensi Istruttori',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_compensi',
+			'url' => '/lezioni/lezioniindex.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 900,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '$user->hasRight("lezioni", "lezione", "read")',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni',
+			'type' => 'left',
+			'titre' => 'Residui Non Imponibili',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_residui_non_imponibili',
+			'url' => '/lezioni/residui_non_imponibili.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 901,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '$user->hasRight("lezioni", "lezione", "read")',
+			'target' => '',
+			'user' => 2,
+		);
+		/* BEGIN MODULEBUILDER LEFTMENU PAGAMENTOARRETRATO */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni',
+			'type' => 'left',
+			'titre' => 'Pagamenti Arretrati',
+			'prefix' => img_picto('', $this->picto, 'class="paddingright pictofixedwidth valignmiddle"'),
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'pagamentoarretrato',
+			'url' => '/lezioni/pagamentoarretrato_list.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+			'object' => 'PagamentoArretrato'
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni,fk_leftmenu=pagamentoarretrato',
+			'type' => 'left',
+			'titre' => 'Lista Arretrati',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_pagamentoarretrato_list',
+			'url' => '/lezioni/pagamentoarretrato_list.php',
+			'langs' => 'lezioni@lezioni',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+			'object' => 'PagamentoArretrato'
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=lezioni,fk_leftmenu=pagamentoarretrato',
+			'type' => 'left',
+			'titre' => 'Nuovo Pagamento Arretrato',
+			'mainmenu' => 'lezioni',
+			'leftmenu' => 'lezioni_pagamentoarretrato_new',
+			'url' => '/lezioni/pagamentoarretrato_card.php?action=create',
+			'langs' => 'lezioni@lezioni',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("lezioni")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+			'object' => 'PagamentoArretrato'
+		);
+		/* END MODULEBUILDER LEFTMENU PAGAMENTOARRETRATO */
 		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT */
 		/* LEFTMENU LEZIONI */
 		$this->menu[$r++]=array(

@@ -31,9 +31,9 @@
  */
 
 /**
- *  \file       htdocs/core/modules/facture/doc/pdf_wheelbite.modules.php
+ *  \file       htdocs/core/modules/facture/doc/pdf_sponge.modules.php
  *  \ingroup    invoice
- *  \brief      File of class to generate customers invoices from wheelbite model
+ *  \brief      File of class to generate customers invoices from sponge model
  */
 
 require_once DOL_DOCUMENT_ROOT.'/core/modules/facture/modules_facture.php';
@@ -43,9 +43,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/pdf.lib.php';
 
 /**
- *	Class to manage PDF invoice template wheelbite
+ *	Class to manage PDF invoice template sponge
  */
-class pdf_wheelbite extends ModelePDFFactures
+class pdf_sponge extends ModelePDFFactures
 {
 	/**
 	 * @var DoliDB Database handler
@@ -133,8 +133,8 @@ class pdf_wheelbite extends ModelePDFFactures
 		$langs->loadLangs(array("main", "bills"));
 
 		$this->db = $db;
-		$this->name = "wheelbite";
-		$this->description = $langs->trans('PDFWheelbiteDescription');
+		$this->name = "sponge";
+		$this->description = $langs->trans('PDFSpongeDescription');
 		$this->update_main_doc_field = 1; // Save the name of generated file as the main doc when generating a doc with this template
 
 		// Dimension page
@@ -2368,22 +2368,7 @@ class pdf_wheelbite extends ModelePDFFactures
 				}
 				if (is_readable($logo)) {
 					$height = pdf_getHeightForLogo($logo);
-					$max_logo_height = 40;
-					if ($height > $max_logo_height) {
-						$height = $max_logo_height;
-					}
-					include_once DOL_DOCUMENT_ROOT.'/core/lib/images.lib.php';
-					$tmp = dol_getImageSize($logo, false);
-					$width = 0;
-					if (!empty($tmp['width']) && !empty($tmp['height'])) {
-						$width = round($height * $tmp['width'] / $tmp['height']);
-					}
-					$max_logo_width = max(0, $this->page_largeur - $this->marge_droite - $w - $this->marge_gauche - 5);
-					if ($width > $max_logo_width && !empty($tmp['width']) && !empty($tmp['height'])) {
-						$width = $max_logo_width;
-						$height = round($width * $tmp['height'] / $tmp['width']);
-					}
-					$pdf->Image($logo, $this->marge_gauche, $posy, $width, $height);
+					$pdf->Image($logo, $this->marge_gauche, $posy, 0, $height); // width=0 (auto)
 				} else {
 					$pdf->SetTextColor(200, 0, 0);
 					$pdf->SetFont('', 'B', $default_font_size - 2);
@@ -2594,54 +2579,7 @@ class pdf_wheelbite extends ModelePDFFactures
 				$carac_emetteur .= "\n";
 			}
 
-			$withCountry = 0;
-			if (isset($object->thirdparty->country_code) && !empty($this->emetteur->country_code) && ($object->thirdparty->country_code != $this->emetteur->country_code)) {
-				$withCountry = 1;
-			}
-
-			$fulladdress = dol_format_address($this->emetteur, $withCountry, "\n", $outputlangs);
-			if ($fulladdress) {
-				$carac_emetteur .= ($carac_emetteur ? "\n" : '') . $outputlangs->convToOutputCharset($fulladdress);
-			}
-
-			// Move professional ids (eg. Partita IVA / Codice Fiscale) into sender box under address and before email/site
-			$prof_lines = '';
-			for ($p = 1; $p <= 10; $p++) {
-				$prop = 'idprof' . $p;
-				if (!empty($this->emetteur->$prop)) {
-					$field = $outputlangs->transcountrynoentities('ProfId' . $p, $this->emetteur->country_code);
-					if (preg_match('/\((.*)\)/i', $field, $reg)) {
-						$field = $reg[1];
-					}
-					$prof_lines .= ($prof_lines ? "\n" : '') . $field . ': ' . $outputlangs->convToOutputCharset($this->emetteur->$prop);
-				}
-			}
-			if (!empty($this->emetteur->tva_intra) && $this->emetteur->tva_intra != '') {
-				$prof_lines .= ($prof_lines ? "\n" : '') . $outputlangs->transnoentities('VATIntraShort') . ': ' . $outputlangs->convToOutputCharset($this->emetteur->tva_intra);
-			}
-
-			if ($prof_lines) {
-				$carac_emetteur .= "\n" . $prof_lines; // append right after address lines
-			}
-
-			if (!getDolGlobalString('MAIN_PDF_DISABLESOURCEDETAILS')) {
-				if ($this->emetteur->phone) {
-					$carac_emetteur .= ($carac_emetteur ? "\n" : '') . $outputlangs->transnoentities("PhoneShort") . ": " . $outputlangs->convToOutputCharset($this->emetteur->phone);
-				}
-				if ($this->emetteur->phone_mobile && getDolGlobalString('MAIN_PDF_SHOW_SOURCE_PHONE_MOBILE')) {
-					$carac_emetteur .= ($carac_emetteur ? ($this->emetteur->phone ? " - " : "\n") : "\n") . $outputlangs->transnoentities("PhoneShort") . ": " . $outputlangs->convToOutputCharset($this->emetteur->phone_mobile);
-				}
-				if ($this->emetteur->fax) {
-					$carac_emetteur .= ($carac_emetteur ? ($this->emetteur->phone ? " - " : "\n") : "\n") . $outputlangs->transnoentities("Fax") . ": " . $outputlangs->convToOutputCharset($this->emetteur->fax);
-				}
-				if ($this->emetteur->email) {
-					$carac_emetteur .= "\n";
-					$carac_emetteur .= ($carac_emetteur ? "\n" : '') . $outputlangs->transnoentities("Email") . ": " . $outputlangs->convToOutputCharset($this->emetteur->email);
-				}
-				if ($this->emetteur->url) {
-					$carac_emetteur .= ($carac_emetteur ? "\n" : '') . $outputlangs->transnoentities("Web") . ": " . $outputlangs->convToOutputCharset($this->emetteur->url);
-				}
-			}
+			$carac_emetteur .= pdf_build_address($outputlangs, $this->emetteur, $object->thirdparty, '', 0, 'source', $object);
 
 			// Show sender
 			$posy = getDolGlobalString('MAIN_PDF_USE_ISO_LOCATION') ? 40 : 42;
@@ -2796,19 +2734,8 @@ class pdf_wheelbite extends ModelePDFFactures
 	 */
 	protected function _pagefoot(&$pdf, $object, $outputlangs, $hidefreetext = 0, $heightforqrinvoice = 0)
 	{
-		// Prevent printing professional ids (idprof*, tva_intra) in footer for this template
-		$fromcompany = clone $this->emetteur;
-		for ($p = 1; $p <= 10; $p++) {
-			$prop = 'idprof' . $p;
-			if (isset($fromcompany->$prop)) {
-				$fromcompany->$prop = '';
-			}
-		}
-		if (isset($fromcompany->tva_intra)) {
-			$fromcompany->tva_intra = '';
-		}
 		$showdetails = getDolGlobalInt('MAIN_GENERATE_DOCUMENTS_SHOW_FOOT_DETAILS', 0);
-		return pdf_pagefoot($pdf, $outputlangs, 'INVOICE_FREE_TEXT', $fromcompany, $heightforqrinvoice + $this->marge_basse, $this->marge_gauche, $this->page_hauteur, $object, $showdetails, $hidefreetext, $this->page_largeur, $this->watermark);
+		return pdf_pagefoot($pdf, $outputlangs, 'INVOICE_FREE_TEXT', $this->emetteur, $heightforqrinvoice + $this->marge_basse, $this->marge_gauche, $this->page_hauteur, $object, $showdetails, $hidefreetext, $this->page_largeur, $this->watermark);
 	}
 
 	/**
